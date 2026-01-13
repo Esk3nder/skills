@@ -20,14 +20,12 @@ Skills are modular capability packages that extend Claude Code with specialized 
 | **UsingSkills** | How to invoke and chain skills |
 | **UsingWorkflows** | Check and invoke relevant workflow skills |
 | **CreateSkill** | Skill authoring and validation |
-| **WritingSkills** | Author or update skills with clear triggers |
 | **ContextEngineering** | Context window optimization |
 
 ### Planning & Execution
 | Skill | Description |
 |-------|-------------|
 | **WritingPlans** | Structured plan creation |
-| **ManagingPlans** | Persistent markdown plans for complex tasks |
 | **ExecutingPlans** | Plan execution with checkpoints |
 | **Brainstorming** | Design exploration workflows |
 
@@ -38,7 +36,6 @@ Skills are modular capability packages that extend Claude Code with specialized 
 | **SubagentDrivenDevelopment** | Multi-agent implementation |
 | **SystematicDebugging** | Root cause analysis |
 | **FinishingBranch** | Branch completion checklist |
-| **FinishingDevelopmentBranch** | Finalize branch with clean tree and green checks |
 | **UsingGitWorktrees** | Parallel branch development |
 | **ReactUseEffect** | React useEffect best practices |
 
