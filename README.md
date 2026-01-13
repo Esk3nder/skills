@@ -18,13 +18,16 @@ Skills are modular capability packages that extend Claude Code with specialized 
 |-------|-------------|
 | **CORE** | System architecture, contacts, telos, state sync |
 | **UsingSkills** | How to invoke and chain skills |
+| **UsingWorkflows** | Check and invoke relevant workflow skills |
 | **CreateSkill** | Skill authoring and validation |
+| **WritingSkills** | Author or update skills with clear triggers |
 | **ContextEngineering** | Context window optimization |
 
 ### Planning & Execution
 | Skill | Description |
 |-------|-------------|
 | **WritingPlans** | Structured plan creation |
+| **ManagingPlans** | Persistent markdown plans for complex tasks |
 | **ExecutingPlans** | Plan execution with checkpoints |
 | **Brainstorming** | Design exploration workflows |
 
@@ -35,11 +38,14 @@ Skills are modular capability packages that extend Claude Code with specialized 
 | **SubagentDrivenDevelopment** | Multi-agent implementation |
 | **SystematicDebugging** | Root cause analysis |
 | **FinishingBranch** | Branch completion checklist |
+| **FinishingDevelopmentBranch** | Finalize branch with clean tree and green checks |
 | **UsingGitWorktrees** | Parallel branch development |
+| **ReactUseEffect** | React useEffect best practices |
 
 ### Code Review
 | Skill | Description |
 |-------|-------------|
+| **Review** | Multi-agent code review with parallel analysis |
 | **RequestingCodeReview** | PR preparation and review requests |
 | **ReceivingCodeReview** | Feedback evaluation and response |
 | **AskDaniel** | Expert review simulation |
@@ -85,6 +91,7 @@ Skills are modular capability packages that extend Claude Code with specialized 
 | **DailyReview** | Daily summary generation |
 | **SkillUsageAnalytics** | Usage tracking and reporting |
 | **VerificationBeforeCompletion** | Pre-completion verification gates |
+| **Compound** | Capture solved problems as categorized documentation |
 | **Trivial** | Simple task handling |
 
 ## Configuration Files
