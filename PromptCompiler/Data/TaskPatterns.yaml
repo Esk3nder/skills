@@ -1,0 +1,136 @@
+# TaskPatterns.yaml
+# Pattern matching rules for deterministic task classification
+# Weights are additive; highest total score wins
+version: "1.0"
+
+task_patterns:
+  classification:
+    description: "Binary/categorical decisions"
+    signals:
+      - pattern: "\\b(is this|categorize|classify|label|which type|what kind)\\b"
+        weight: 1.0
+      - pattern: "\\b(yes or no|true or false|valid or invalid)\\b"
+        weight: 0.8
+      - pattern: "\\b(should I|is it|does it|can it)\\b"
+        weight: 0.6
+    negative_signals:
+      - pattern: "\\b(why|how|explain|because)\\b"
+        weight: -0.5
+    antipatterns:
+      - "cot"  # Overthinking hurts classification accuracy
+
+  reasoning:
+    description: "Logical analysis, causal explanation"
+    signals:
+      - pattern: "\\b(why|explain|how does|because|reason|cause)\\b"
+        weight: 1.0
+      - pattern: "\\b(calculate|solve|prove|derive|deduce)\\b"
+        weight: 0.9
+      - pattern: "\\b(step by step|walk through|break down)\\b"
+        weight: 0.8
+      - pattern: "\\b(what happens if|consequences|implications)\\b"
+        weight: 0.7
+    negative_signals: []
+    antipatterns: []
+
+  code:
+    description: "Software engineering tasks"
+    signals:
+      - pattern: "\\.(ts|js|py|go|rs|java|cpp|tsx|jsx|vue|svelte)\\b"
+        weight: 1.0
+      - pattern: "\\b(function|class|method|variable|bug|error|fix|refactor|implement)\\b"
+        weight: 0.9
+      - pattern: "\\b(test|debug|compile|build|lint|format)\\b"
+        weight: 0.8
+      - pattern: "/(src|lib|components|hooks|utils|services|api)/"
+        weight: 0.7
+      - pattern: "\\b(npm|yarn|bun|pip|cargo|go mod)\\b"
+        weight: 0.6
+      - pattern: "\\b(PR|pull request|commit|merge|branch)\\b"
+        weight: 0.5
+    negative_signals: []
+    antipatterns: []
+
+  synthesis:
+    description: "Content creation and generation"
+    signals:
+      - pattern: "\\b(write|create|generate|compose|draft|make|build)\\b"
+        weight: 1.0
+      - pattern: "\\b(new|from scratch|blank|initial)\\b"
+        weight: 0.6
+      - pattern: "\\b(template|boilerplate|scaffold)\\b"
+        weight: 0.5
+    negative_signals:
+      - pattern: "\\b(fix|debug|error|bug)\\b"
+        weight: -0.4
+    antipatterns: []
+
+  research:
+    description: "Information gathering and exploration"
+    signals:
+      - pattern: "\\b(find|search|look for|what are|list all|show me)\\b"
+        weight: 1.0
+      - pattern: "\\b(where|which files|examples of|instances of)\\b"
+        weight: 0.8
+      - pattern: "\\b(documentation|docs|reference|usage)\\b"
+        weight: 0.6
+    negative_signals:
+      - pattern: "\\b(write|create|implement|fix)\\b"
+        weight: -0.3
+    antipatterns: []
+
+  evaluation:
+    description: "Assessment, review, comparison"
+    signals:
+      - pattern: "\\b(review|critique|assess|evaluate|compare|rate|analyze)\\b"
+        weight: 1.0
+      - pattern: "\\b(pros and cons|tradeoffs|better|worse|vs)\\b"
+        weight: 0.7
+      - pattern: "\\b(quality|performance|security|maintainability)\\b"
+        weight: 0.5
+    negative_signals: []
+    antipatterns: []
+
+  agentic:
+    description: "Multi-step autonomous tasks"
+    signals:
+      - pattern: "\\b(set up|configure|deploy|install|migrate)\\b"
+        weight: 1.0
+      - pattern: "\\b(end to end|full|complete|entire|whole)\\b"
+        weight: 0.6
+      - pattern: "\\b(then|after that|once done|next|finally)\\b"
+        weight: 0.5
+      - pattern: "\\b(pipeline|workflow|process|automation)\\b"
+        weight: 0.5
+    negative_signals: []
+    antipatterns: []
+
+# Complexity indicators (modify technique selection)
+complexity_signals:
+  high:
+    - pattern: "\\b(complex|complicated|tricky|challenging)\\b"
+      weight: 0.3
+    - pattern: "\\b(multiple|several|various|many)\\b"
+      weight: 0.2
+    - pattern: "\\b(across|throughout|all|every)\\b"
+      weight: 0.2
+  low:
+    - pattern: "\\b(simple|quick|just|only|small)\\b"
+      weight: -0.3
+    - pattern: "\\b(one|single|basic|trivial)\\b"
+      weight: -0.2
+
+# Constraint indicators (trigger additional techniques)
+constraint_signals:
+  correctness_critical:
+    - pattern: "\\b(security|vulnerability|auth|credential|password|token)\\b"
+      weight: 1.0
+    - pattern: "\\b(production|live|customer|critical|important)\\b"
+      weight: 0.8
+    - pattern: "\\b(must|required|essential|mandatory)\\b"
+      weight: 0.5
+  json_output:
+    - pattern: "\\b(json|JSON|structured|parseable)\\b"
+      weight: 1.0
+    - pattern: "\\b(api|response|payload)\\b"
+      weight: 0.5
