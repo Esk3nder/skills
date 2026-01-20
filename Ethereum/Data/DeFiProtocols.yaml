@@ -1,0 +1,242 @@
+# DeFi Protocol Registry
+# Reference addresses and patterns for major Ethereum DeFi protocols
+# Network: Ethereum Mainnet (chainId: 1)
+
+version: "2024-03"
+network: mainnet
+chain_id: 1
+
+# =============================================================================
+# AUTOMATED MARKET MAKERS (AMMs)
+# =============================================================================
+
+amm:
+  uniswap_v2:
+    name: "Uniswap V2"
+    pattern: constant_product
+    invariant: "x * y = k"
+    fee: 0.003  # 0.3%
+    contracts:
+      factory: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+      router02: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+    pair_init_code_hash: "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f"
+    docs: "https://docs.uniswap.org/contracts/v2/overview"
+
+  uniswap_v3:
+    name: "Uniswap V3"
+    pattern: concentrated_liquidity
+    invariant: "L = sqrt(x * y)"
+    fee_tiers: [100, 500, 3000, 10000]  # basis points: 0.01%, 0.05%, 0.3%, 1%
+    tick_spacing:
+      100: 1
+      500: 10
+      3000: 60
+      10000: 200
+    contracts:
+      factory: "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+      swap_router: "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+      swap_router02: "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
+      nft_position_manager: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88"
+      quoter_v2: "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
+    pool_init_code_hash: "0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54"
+    docs: "https://docs.uniswap.org/contracts/v3/overview"
+
+  curve:
+    name: "Curve Finance"
+    patterns:
+      stableswap: "A * n^n * sum(x) + D = A * D * n^n + D^(n+1) / (n^n * prod(x))"
+      cryptoswap: "Modified stableswap for volatile pairs"
+    contracts:
+      address_provider: "0x0000000022D53366457F9d5E68Ec105046FC4383"
+      registry: "0x90E00ACe148ca3b23Ac1bC8C240C2a7Dd9c2d7f5"
+      factory: "0xB9fC157394Af804a3578134A6585C0dc9cc990d4"
+    docs: "https://docs.curve.fi/"
+
+  balancer_v2:
+    name: "Balancer V2"
+    pattern: weighted_pool
+    invariant: "prod(balance_i ^ weight_i) = k"
+    contracts:
+      vault: "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+      weighted_pool_factory: "0x897888115Ada5773E02aA29F775430BFB5F34c51"
+    docs: "https://docs.balancer.fi/"
+
+# =============================================================================
+# LENDING PROTOCOLS
+# =============================================================================
+
+lending:
+  aave_v3:
+    name: "Aave V3"
+    pattern: pool_based
+    interest_model: utilization_curve
+    contracts:
+      pool: "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+      pool_addresses_provider: "0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e"
+      pool_data_provider: "0x7B4EB56E7CD4b454BA8ff71E4518426369a138a3"
+      oracle: "0x54586bE62E3c3580375aE3723C145253060Ca0C2"
+    parameters:
+      optimal_utilization: 0.80
+      base_rate: 0.0
+      slope1: 0.04
+      slope2: 0.75
+      reserve_factor: 0.10
+    docs: "https://docs.aave.com/developers/getting-started/readme"
+
+  compound_v3:
+    name: "Compound V3 (Comet)"
+    pattern: isolated_markets
+    contracts:
+      comet_usdc: "0xc3d688B66703497DAA19211EEdff47f25384cdc3"
+      comet_weth: "0xA17581A9E3356d9A858b789D68B4d866e593aE94"
+      configurator: "0x316f9708bB98af7dA9c68C1C3b5e79039cD336E3"
+    docs: "https://docs.compound.finance/"
+
+  maker:
+    name: "MakerDAO"
+    pattern: cdp_based
+    contracts:
+      vat: "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B"
+      dai_join: "0x9759A6Ac90977b93B58547b4A71c78317f391A28"
+      spot: "0x65C79fcB50Ca1594B025960e539eD7A9a6D434A3"
+      jug: "0x19c0976f590D67707E62397C87829d896Dc0f1F1"
+      dai: "0x6B175474E89094C44Da98b954EesdeAa6Df63E546a"
+    docs: "https://docs.makerdao.com/"
+
+# =============================================================================
+# ORACLES
+# =============================================================================
+
+oracles:
+  chainlink:
+    name: "Chainlink"
+    pattern: aggregator_rounds
+    contracts:
+      feed_registry: "0x47Fb2585D2C56Fe188D0E6ec628a38b74fCeeeDf"
+    feeds:
+      ETH_USD: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+      BTC_USD: "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c"
+      USDC_USD: "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6"
+      DAI_USD: "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9"
+      LINK_USD: "0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c"
+    parameters:
+      heartbeat_majors: 3600  # 1 hour
+      heartbeat_others: 86400  # 24 hours
+      deviation_threshold: 0.005  # 0.5%
+    docs: "https://docs.chain.link/data-feeds"
+
+  uniswap_twap:
+    name: "Uniswap V3 TWAP"
+    pattern: time_weighted_average
+    libraries:
+      oracle_library: "0xB210CE856631EeEB767eFa666EC7C1C57738d438"
+    recommended_window: 1800  # 30 minutes
+    docs: "https://docs.uniswap.org/contracts/v3/guides/providing-liquidity/liquidity-oracles"
+
+  pyth:
+    name: "Pyth Network"
+    pattern: pull_oracle
+    contracts:
+      pyth: "0x4305FB66699C3B2702D4d05CF36551390A4c69C6"
+    docs: "https://docs.pyth.network/"
+
+# =============================================================================
+# LIQUID STAKING
+# =============================================================================
+
+liquid_staking:
+  lido:
+    name: "Lido"
+    token_model: rebasing
+    contracts:
+      steth: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
+      wsteth: "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+      withdrawal_queue: "0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1"
+    parameters:
+      protocol_fee: 0.10  # 10% of rewards
+    docs: "https://docs.lido.fi/"
+
+  rocket_pool:
+    name: "Rocket Pool"
+    token_model: exchange_rate
+    contracts:
+      reth: "0xae78736Cd615f374D3085123A210448E74Fc6393"
+      storage: "0x1d8f8f00cfa6758d7bE78336684788Fb0ee0Fa46"
+      deposit_pool: "0xDD3f50F8A6CafbE9b31a427582963f465E745AF8"
+    parameters:
+      min_deposit: 0.01  # ETH
+      node_operator_commission: 0.14  # 14%
+    docs: "https://docs.rocketpool.net/"
+
+  frax_ether:
+    name: "Frax Ether"
+    token_model: dual_token
+    contracts:
+      frxeth: "0x5E8422345238F34275888049021821E8E08CAa1f"
+      sfrxeth: "0xac3E018457B222d93114458476f3E3416Abbe38F"
+      minter: "0xbAFA44EFE7901E04E39Dad13167D089C559c1138"
+    docs: "https://docs.frax.finance/frax-ether/overview"
+
+# =============================================================================
+# FLASH LOANS
+# =============================================================================
+
+flash_loans:
+  aave:
+    contracts:
+      pool: "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+    fee: 0.0009  # 0.09%
+    callback: "executeOperation(address[],uint256[],uint256[],address,bytes)"
+
+  uniswap_v2:
+    contracts:
+      any_pair: true
+    fee: 0.003  # 0.3% (paid on return)
+    callback: "uniswapV2Call(address,uint256,uint256,bytes)"
+
+  uniswap_v3:
+    contracts:
+      any_pool: true
+    fee: 0  # No fee if repaid in same token
+    callback: "uniswapV3FlashCallback(uint256,uint256,bytes)"
+
+  balancer:
+    contracts:
+      vault: "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+    fee: 0  # No fee
+    callback: "receiveFlashLoan(address[],uint256[],uint256[],bytes)"
+
+# =============================================================================
+# USEFUL TOKENS
+# =============================================================================
+
+tokens:
+  weth:
+    name: "Wrapped Ether"
+    address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    decimals: 18
+
+  usdc:
+    name: "USD Coin"
+    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    decimals: 6
+
+  usdt:
+    name: "Tether USD"
+    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    decimals: 6
+
+  dai:
+    name: "Dai Stablecoin"
+    address: "0x6B175474E89094C44Da98b954EedsEaa6Df63E546a"
+    decimals: 18
+
+  wbtc:
+    name: "Wrapped Bitcoin"
+    address: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+    decimals: 8
+
+  link:
+    name: "Chainlink"
+    address: "0x514910771AF9Ca656af840dff83E8264EcF986CA"
+    decimals: 18

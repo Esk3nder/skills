@@ -1,0 +1,618 @@
+# go-ethereum Package Map for Code Navigation
+# Version: 1.14.x (Cancun)
+# Repository: https://github.com/ethereum/go-ethereum
+
+version: "1.14.x"
+
+# Top-level architecture
+architecture:
+  description: |
+    go-ethereum is organized into several layers:
+    1. cmd/ - Entry points and CLI tools
+    2. eth/ - Main Ethereum protocol implementation
+    3. core/ - Blockchain core (state, VM, consensus)
+    4. p2p/ - Peer-to-peer networking
+    5. rpc/ - JSON-RPC and IPC interfaces
+    6. node/ - Node lifecycle management
+
+    Key data flow:
+    RPC request → eth/api → core/state → trie → ethdb
+
+packages:
+  # ====================
+  # COMMAND LINE TOOLS
+  # ====================
+  cmd:
+    path: "cmd"
+    description: "Command-line entry points"
+    key_directories:
+      - path: "cmd/geth"
+        description: "Main Ethereum client"
+        key_files:
+          - "main.go"           # Entry point
+          - "config.go"         # Configuration handling
+          - "consolecmd.go"     # JavaScript console
+      - path: "cmd/evm"
+        description: "Standalone EVM execution"
+        key_files:
+          - "main.go"
+          - "runner.go"         # EVM execution runner
+      - path: "cmd/devp2p"
+        description: "P2P networking utilities"
+
+  # ====================
+  # ETHEREUM PROTOCOL
+  # ====================
+  eth:
+    path: "eth"
+    description: "Main Ethereum protocol implementation"
+    key_files:
+      - file: "backend.go"
+        description: "Main Ethereum struct - ties everything together"
+        key_types:
+          - "Ethereum"          # Main service struct
+        key_functions:
+          - "New"               # Creates Ethereum instance
+          - "Start"             # Starts all subservices
+          - "Stop"              # Graceful shutdown
+
+      - file: "handler.go"
+        description: "Protocol message handler"
+        key_types:
+          - "handler"           # Protocol handler
+        key_functions:
+          - "newHandler"        # Creates handler
+          - "Start"             # Starts protocol
+          - "runEthPeer"        # Handles peer connection
+
+      - file: "sync.go"
+        description: "Chain synchronization"
+        key_functions:
+          - "doSync"            # Main sync loop
+          - "chainSyncer"       # Sync coordination
+
+      - file: "api_backend.go"
+        description: "Backend API implementation"
+        key_types:
+          - "EthAPIBackend"
+        key_functions:
+          - "GetTransaction"
+          - "GetReceipts"
+          - "StateAndHeaderByNumber"
+
+    subpackages:
+      - path: "eth/protocols/eth"
+        description: "eth protocol (blocks, transactions)"
+        key_files:
+          - "protocol.go"       # Protocol definition
+          - "handler.go"        # Message handling
+          - "peer.go"           # Peer representation
+
+      - path: "eth/protocols/snap"
+        description: "snap protocol (fast state sync)"
+        key_files:
+          - "protocol.go"
+          - "handler.go"
+          - "sync.go"           # Snap sync implementation
+
+      - path: "eth/tracers"
+        description: "Transaction and call tracing"
+        key_files:
+          - "api.go"            # Tracing API
+          - "tracers.go"        # Tracer registry
+
+      - path: "eth/catalyst"
+        description: "Engine API (consensus client communication)"
+        key_files:
+          - "api.go"            # Engine API implementation
+        key_functions:
+          - "ForkchoiceUpdatedV3"
+          - "NewPayloadV3"
+          - "GetPayloadV3"
+
+  # ====================
+  # BLOCKCHAIN CORE
+  # ====================
+  core:
+    path: "core"
+    description: "Blockchain core implementation"
+    key_files:
+      - file: "blockchain.go"
+        description: "Canonical chain management"
+        key_types:
+          - "BlockChain"        # Main blockchain struct
+        key_functions:
+          - "NewBlockChain"     # Creates blockchain
+          - "InsertChain"       # Inserts new blocks
+          - "GetBlock"          # Retrieves block by hash
+          - "GetBlockByNumber"  # Retrieves block by number
+          - "CurrentBlock"      # Gets chain head
+          - "Reorg"             # Handles chain reorganization
+
+      - file: "state_processor.go"
+        description: "Block state transitions"
+        key_functions:
+          - "Process"           # Processes block transactions
+          - "ApplyTransaction"  # Applies single transaction
+
+      - file: "state_transition.go"
+        description: "Transaction state transition"
+        key_types:
+          - "StateTransition"
+        key_functions:
+          - "TransitionDb"      # Executes state transition
+          - "preCheck"          # Pre-transaction checks
+          - "IntrinsicGas"      # Calculates intrinsic gas
+
+      - file: "genesis.go"
+        description: "Genesis block handling"
+        key_types:
+          - "Genesis"
+        key_functions:
+          - "SetupGenesisBlock"
+          - "ToBlock"
+
+      - file: "block_validator.go"
+        description: "Block validation"
+        key_functions:
+          - "ValidateBody"
+          - "ValidateState"
+
+    subpackages:
+      - path: "core/state"
+        description: "World state management"
+        key_files:
+          - file: "statedb.go"
+            description: "Main state database interface"
+            key_types:
+              - "StateDB"         # Cacheable state interface
+            key_functions:
+              - "New"             # Creates StateDB
+              - "GetBalance"      # Gets account balance
+              - "SetBalance"      # Sets account balance
+              - "GetNonce"        # Gets account nonce
+              - "SetNonce"        # Sets account nonce
+              - "GetCode"         # Gets contract code
+              - "SetCode"         # Sets contract code
+              - "GetState"        # Reads storage slot
+              - "SetState"        # Writes storage slot
+              - "Commit"          # Commits state to trie
+              - "Snapshot"        # Creates state snapshot
+              - "RevertToSnapshot" # Reverts to snapshot
+
+          - file: "state_object.go"
+            description: "Individual account representation"
+            key_types:
+              - "stateObject"     # Single account state
+            key_functions:
+              - "GetState"        # Gets storage value
+              - "SetState"        # Sets storage value
+
+          - file: "trie_prefetcher.go"
+            description: "Trie prefetching for parallel execution"
+
+      - path: "core/vm"
+        description: "Ethereum Virtual Machine"
+        key_files:
+          - file: "evm.go"
+            description: "EVM context and environment"
+            key_types:
+              - "EVM"             # EVM execution environment
+              - "Context"         # Block context
+              - "TxContext"       # Transaction context
+            key_functions:
+              - "NewEVM"          # Creates EVM instance
+              - "Call"            # CALL opcode implementation
+              - "CallCode"        # CALLCODE implementation
+              - "DelegateCall"    # DELEGATECALL implementation
+              - "StaticCall"      # STATICCALL implementation
+              - "Create"          # CREATE opcode
+              - "Create2"         # CREATE2 opcode
+
+          - file: "interpreter.go"
+            description: "EVM interpreter - main execution loop"
+            key_types:
+              - "EVMInterpreter"
+            key_functions:
+              - "NewEVMInterpreter"
+              - "Run"             # Main execution loop
+
+          - file: "instructions.go"
+            description: "Opcode implementations"
+            key_functions:
+              - "opAdd"           # ADD opcode
+              - "opSub"           # SUB opcode
+              - "opMul"           # MUL opcode
+              - "opSload"         # SLOAD opcode
+              - "opSstore"        # SSTORE opcode
+              - "opCall"          # Internal CALL logic
+              - "opCreate"        # Internal CREATE logic
+              - "opReturn"        # RETURN opcode
+              - "opRevert"        # REVERT opcode
+
+          - file: "jump_table.go"
+            description: "Opcode dispatch table"
+            key_types:
+              - "JumpTable"       # Opcode -> handler mapping
+              - "operation"       # Single operation definition
+            key_functions:
+              - "newFrontierInstructionSet"
+              - "newCancunInstructionSet"
+
+          - file: "gas_table.go"
+            description: "Gas cost calculations"
+            key_functions:
+              - "gasCall"         # CALL gas calculation
+              - "gasSStore"       # SSTORE gas (EIP-2200)
+              - "makeGasLog"      # LOG gas calculation
+
+          - file: "contract.go"
+            description: "Contract representation during execution"
+            key_types:
+              - "Contract"
+            key_functions:
+              - "NewContract"
+              - "GetOp"           # Gets next opcode
+              - "GetByte"         # Gets bytecode byte
+
+          - file: "memory.go"
+            description: "EVM memory implementation"
+            key_types:
+              - "Memory"
+            key_functions:
+              - "Set"             # Sets memory bytes
+              - "Get"             # Gets memory bytes
+              - "Resize"          # Expands memory
+
+          - file: "stack.go"
+            description: "EVM stack implementation"
+            key_types:
+              - "Stack"
+            key_functions:
+              - "push"            # Pushes to stack
+              - "pop"             # Pops from stack
+              - "peek"            # Peeks at stack
+
+      - path: "core/txpool"
+        description: "Transaction pool"
+        key_files:
+          - "txpool.go"         # Main pool interface
+          - "legacypool/pool.go" # Legacy transaction pool
+          - "blobpool/blobpool.go" # EIP-4844 blob pool
+
+      - path: "core/rawdb"
+        description: "Low-level database operations"
+        key_files:
+          - "accessors_chain.go" # Chain data accessors
+          - "accessors_state.go" # State data accessors
+          - "schema.go"          # Database key schema
+
+      - path: "core/types"
+        description: "Core data types"
+        key_files:
+          - "block.go"          # Block type
+          - "transaction.go"    # Transaction types
+          - "receipt.go"        # Receipt type
+          - "log.go"            # Log/event type
+
+  # ====================
+  # TRIE DATA STRUCTURE
+  # ====================
+  trie:
+    path: "trie"
+    description: "Merkle Patricia Trie implementation"
+    key_files:
+      - file: "trie.go"
+        description: "Main trie interface"
+        key_types:
+          - "Trie"              # Merkle Patricia Trie
+        key_functions:
+          - "New"               # Creates new trie
+          - "Get"               # Gets value by key
+          - "Update"            # Inserts/updates value
+          - "Delete"            # Deletes key
+          - "Hash"              # Computes root hash
+          - "Commit"            # Commits to database
+
+      - file: "node.go"
+        description: "Trie node types"
+        key_types:
+          - "node"              # Node interface
+          - "fullNode"          # Branch node (16 children + value)
+          - "shortNode"         # Extension/leaf node
+          - "valueNode"         # Leaf value
+          - "hashNode"          # Reference by hash
+
+      - file: "hasher.go"
+        description: "Trie hashing"
+        key_functions:
+          - "hash"              # Hashes a node
+          - "hashRoot"          # Hashes trie root
+
+      - file: "proof.go"
+        description: "Merkle proof generation and verification"
+        key_functions:
+          - "Prove"             # Generates proof
+          - "VerifyProof"       # Verifies proof
+
+      - file: "encoding.go"
+        description: "Hex-prefix encoding for keys"
+        key_functions:
+          - "hexToCompact"      # HP encoding
+          - "compactToHex"      # HP decoding
+
+    subpackages:
+      - path: "triedb"
+        description: "Trie database backends"
+        key_files:
+          - "database.go"       # Main database interface
+        subpackages:
+          - path: "triedb/pathdb"
+            description: "Path-based state storage"
+          - path: "triedb/hashdb"
+            description: "Hash-based state storage"
+
+  # ====================
+  # RLP ENCODING
+  # ====================
+  rlp:
+    path: "rlp"
+    description: "Recursive Length Prefix encoding"
+    key_files:
+      - file: "encode.go"
+        description: "RLP encoding"
+        key_functions:
+          - "Encode"            # Encodes value to writer
+          - "EncodeToBytes"     # Encodes to byte slice
+          - "EncodeToReader"    # Encodes to reader
+
+      - file: "decode.go"
+        description: "RLP decoding"
+        key_types:
+          - "Stream"            # Streaming decoder
+        key_functions:
+          - "Decode"            # Decodes from reader
+          - "DecodeBytes"       # Decodes from bytes
+
+      - file: "raw.go"
+        description: "Raw RLP handling"
+        key_types:
+          - "RawValue"          # Undecoded RLP
+
+  # ====================
+  # CONSENSUS
+  # ====================
+  consensus:
+    path: "consensus"
+    description: "Consensus engine interface and implementations"
+    key_files:
+      - file: "consensus.go"
+        description: "Consensus engine interface"
+        key_types:
+          - "Engine"            # Consensus engine interface
+        key_functions:
+          - "VerifyHeader"
+          - "VerifyHeaders"
+          - "Prepare"
+          - "Finalize"
+          - "Seal"
+
+    subpackages:
+      - path: "consensus/beacon"
+        description: "Proof-of-Stake consensus (post-merge)"
+        key_files:
+          - "consensus.go"      # Beacon consensus engine
+
+      - path: "consensus/ethash"
+        description: "Proof-of-Work consensus (pre-merge, deprecated)"
+        key_files:
+          - "ethash.go"         # Ethash algorithm
+          - "consensus.go"      # Consensus implementation
+
+      - path: "consensus/misc"
+        description: "Fork-related logic"
+        key_files:
+          - "eip1559.go"        # EIP-1559 base fee
+          - "eip4844.go"        # Blob gas calculations
+
+  # ====================
+  # NETWORKING
+  # ====================
+  p2p:
+    path: "p2p"
+    description: "Peer-to-peer networking"
+    key_files:
+      - file: "server.go"
+        description: "P2P server"
+        key_types:
+          - "Server"            # P2P server
+        key_functions:
+          - "Start"             # Starts server
+          - "AddPeer"           # Adds peer
+
+      - file: "peer.go"
+        description: "Peer representation"
+        key_types:
+          - "Peer"              # Connected peer
+
+      - file: "message.go"
+        description: "Message handling"
+        key_types:
+          - "Msg"               # P2P message
+
+    subpackages:
+      - path: "p2p/discover"
+        description: "Node discovery (discv4, discv5)"
+        key_files:
+          - "table.go"          # Kademlia table
+          - "v4_udp.go"         # Discovery v4
+          - "v5_udp.go"         # Discovery v5
+
+      - path: "p2p/enode"
+        description: "Ethereum Node Records"
+        key_files:
+          - "node.go"           # Node representation
+          - "urlv4.go"          # enode:// URLs
+
+      - path: "p2p/rlpx"
+        description: "RLPx protocol (encrypted transport)"
+        key_files:
+          - "rlpx.go"           # RLPx connection
+
+  # ====================
+  # RPC
+  # ====================
+  rpc:
+    path: "rpc"
+    description: "JSON-RPC implementation"
+    key_files:
+      - file: "server.go"
+        description: "RPC server"
+        key_types:
+          - "Server"
+        key_functions:
+          - "RegisterName"      # Registers service
+
+      - file: "client.go"
+        description: "RPC client"
+        key_types:
+          - "Client"
+        key_functions:
+          - "Call"              # Makes RPC call
+          - "Subscribe"         # Creates subscription
+
+      - file: "handler.go"
+        description: "Request handling"
+
+      - file: "json.go"
+        description: "JSON codec"
+
+  # ====================
+  # NODE LIFECYCLE
+  # ====================
+  node:
+    path: "node"
+    description: "Node lifecycle management"
+    key_files:
+      - file: "node.go"
+        description: "Main node struct"
+        key_types:
+          - "Node"              # Service container
+        key_functions:
+          - "New"               # Creates node
+          - "Start"             # Starts all services
+          - "Close"             # Graceful shutdown
+          - "RegisterLifecycle" # Registers service
+
+      - file: "api.go"
+        description: "Admin API"
+
+      - file: "config.go"
+        description: "Node configuration"
+        key_types:
+          - "Config"
+
+  # ====================
+  # DATABASE
+  # ====================
+  ethdb:
+    path: "ethdb"
+    description: "Database interfaces"
+    key_files:
+      - file: "database.go"
+        description: "Database interface"
+        key_types:
+          - "Database"          # Key-value database
+          - "Batch"             # Batch writes
+          - "Iterator"          # Key iteration
+
+    subpackages:
+      - path: "ethdb/leveldb"
+        description: "LevelDB backend"
+      - path: "ethdb/pebble"
+        description: "Pebble backend (default)"
+      - path: "ethdb/memorydb"
+        description: "In-memory database (testing)"
+
+  # ====================
+  # ACCOUNTS & CRYPTO
+  # ====================
+  accounts:
+    path: "accounts"
+    description: "Account management"
+    key_files:
+      - "manager.go"          # Account manager
+      - "accounts.go"         # Account interface
+
+    subpackages:
+      - path: "accounts/keystore"
+        description: "Encrypted keystore"
+      - path: "accounts/abi"
+        description: "ABI encoding/decoding"
+        key_files:
+          - "abi.go"            # ABI definition
+          - "method.go"         # Method encoding
+          - "argument.go"       # Argument handling
+
+  crypto:
+    path: "crypto"
+    description: "Cryptographic functions"
+    key_files:
+      - file: "crypto.go"
+        description: "ECDSA operations"
+        key_functions:
+          - "Keccak256"         # Keccak-256 hash
+          - "PubkeyToAddress"   # Public key to address
+          - "Sign"              # ECDSA signing
+          - "Ecrecover"         # Public key recovery
+
+      - file: "signature_cgo.go"
+        description: "Optimized signatures (with libsecp256k1)"
+
+# Code navigation patterns
+patterns:
+  # Finding function implementations
+  function_def: 'func\s+(?:\([^)]+\)\s+)?{NAME}\s*\('
+
+  # Finding type definitions
+  type_def: 'type\s+{NAME}\s+(?:struct|interface)'
+
+  # Finding interface implementations
+  implements: 'func\s+\([^)]*\*?{TYPE}\)\s+{METHOD}\s*\('
+
+  # Finding constant definitions
+  const_def: 'const\s+{NAME}\s*='
+
+  # Finding variable declarations
+  var_def: 'var\s+{NAME}\s+'
+
+# Key entry points for common operations
+entry_points:
+  transaction_execution:
+    - "eth/api_backend.go:SendTx"
+    - "core/tx_pool.go:Add"
+    - "core/state_processor.go:Process"
+    - "core/state_transition.go:TransitionDb"
+    - "core/vm/evm.go:Call"
+
+  block_import:
+    - "eth/handler.go:handleBlockBroadcast"
+    - "core/blockchain.go:InsertChain"
+    - "core/blockchain.go:insertChain"
+    - "core/state_processor.go:Process"
+
+  state_access:
+    - "core/state/statedb.go:GetState"
+    - "core/state/state_object.go:GetState"
+    - "trie/trie.go:Get"
+
+  storage_write:
+    - "core/vm/instructions.go:opSstore"
+    - "core/state/statedb.go:SetState"
+    - "core/state/state_object.go:SetState"
+    - "core/state/state_object.go:setState"
+
+  contract_creation:
+    - "core/vm/evm.go:Create"
+    - "core/vm/evm.go:create"
+    - "core/state/statedb.go:CreateAccount"

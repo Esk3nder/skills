@@ -1,0 +1,66 @@
+{
+  "id": "tdd",
+  "name": "TestDrivenDevelopment",
+  "description": "Red-green-refactor cycle for test-driven development",
+  "entry_contract": {
+    "required_fields": []
+  },
+  "initial_phase": "red",
+  "phases": {
+    "red": {
+      "allowed_tools": ["Read", "Glob", "Grep", "Write", "Edit", "Bash", "Task"],
+      "path_policies": {
+        "allow_write": [
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/__tests__/**"
+        ],
+        "deny_write": []
+      },
+      "bash_policies": {
+        "allow_patterns": ["bun test", "npm test", "npx jest", "vitest"],
+        "deny_patterns": []
+      },
+      "required_artifacts": [],
+      "exit_gate": {
+        "command": "bun test 2>&1 | grep -qE '(FAIL|failing|failed)'",
+        "expected_exit": 0
+      }
+    },
+    "green": {
+      "allowed_tools": ["Read", "Glob", "Grep", "Write", "Edit", "Bash", "Task"],
+      "path_policies": {},
+      "bash_policies": {
+        "allow_patterns": ["bun test", "npm test", "npx jest", "vitest", "bun run", "npm run"],
+        "deny_patterns": []
+      },
+      "required_artifacts": [],
+      "exit_gate": {
+        "command": "bun test",
+        "expected_exit": 0
+      }
+    },
+    "refactor": {
+      "allowed_tools": ["Read", "Glob", "Grep", "Write", "Edit", "Bash", "Task"],
+      "path_policies": {},
+      "bash_policies": {
+        "allow_patterns": ["bun test", "npm test", "npx jest", "vitest", "bun run", "npm run"],
+        "deny_patterns": []
+      },
+      "required_artifacts": [],
+      "exit_gate": {
+        "command": "bun test",
+        "expected_exit": 0
+      }
+    }
+  },
+  "quality_gates": [
+    {
+      "command": "bun test",
+      "block_on_failure": true,
+      "message": "All tests must pass"
+    }
+  ]
+}

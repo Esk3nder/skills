@@ -1,0 +1,335 @@
+# TechniqueRegistry.yaml
+# Prompt engineering techniques from "The Prompt Report" (arXiv:2406.06608)
+# Each technique maps to a template fragment in the compiler
+version: "1.0"
+source: "The Prompt Report (arXiv:2406.06608)"
+
+technique_families:
+  zero_shot:
+    description: "Single-turn prompts without examples"
+  few_shot:
+    description: "Prompts with example demonstrations"
+  cot:
+    description: "Chain-of-thought reasoning patterns"
+  decomposition:
+    description: "Breaking complex tasks into subtasks"
+  self_critique:
+    description: "Self-verification and consistency checking"
+  output_control:
+    description: "Constraining output format"
+  code_specific:
+    description: "Software engineering patterns"
+
+techniques:
+  # Zero-Shot Family
+  zero_shot_direct:
+    family: zero_shot
+    description: "Direct instruction without examples"
+    when_to_use:
+      - simple_task
+      - clear_intent
+      - model_capable
+    when_to_avoid:
+      - complex_format
+      - novel_domain
+    template_section: |
+      ## Task
+      {{task.description}}
+
+  role_prompting:
+    family: zero_shot
+    description: "Assign expert persona to model"
+    when_to_use:
+      - domain_expertise_needed
+      - specific_perspective
+    when_to_avoid:
+      - factual_queries
+      - simple_tasks
+    template_section: |
+      ## Role
+      You are {{role.persona}}. {{role.expertise}}
+
+  # Chain-of-Thought Family
+  chain_of_thought:
+    family: cot
+    description: "Explicit step-by-step reasoning"
+    when_to_use:
+      - math
+      - logic
+      - multi_step_reasoning
+    when_to_avoid:
+      - classification
+      - simple_retrieval
+    template_section: |
+      ## Approach
+      Think through this step by step:
+      1. First, understand the current state
+      2. Identify what needs to change
+      3. Plan the minimal changes required
+      4. Execute the changes
+      5. Verify the solution works
+
+  zero_shot_cot:
+    family: cot
+    description: "Simple CoT trigger phrase"
+    when_to_use:
+      - reasoning
+      - no_examples_available
+    when_to_avoid:
+      - simple_tasks
+    template_section: |
+      Let's think through this step by step.
+
+  # Decomposition Family
+  least_to_most:
+    family: decomposition
+    description: "Break into subproblems, solve in order"
+    when_to_use:
+      - complex_multi_step
+      - dependency_chain
+    when_to_avoid:
+      - simple_tasks
+      - parallel_subtasks
+    template_section: |
+      ## Decomposition
+      Break this into smaller, sequential steps:
+      {{#each subtasks}}
+      {{add @index 1}}. {{this}}
+      {{/each}}
+
+  plan_and_solve:
+    family: decomposition
+    description: "Create plan first, then execute"
+    when_to_use:
+      - implementation
+      - project_setup
+    when_to_avoid:
+      - quick_fixes
+      - single_operation
+    template_section: |
+      ## Plan
+      Before implementing, create a plan:
+      1. Identify all components that need changes
+      2. Determine the order of operations
+      3. List potential risks or blockers
+      4. Execute plan step by step
+
+  # Self-Critique Family
+  self_consistency:
+    family: self_critique
+    description: "Generate multiple answers, validate consistency"
+    when_to_use:
+      - uncertainty
+      - high_stakes
+    when_to_avoid:
+      - deterministic_tasks
+      - cost_sensitive
+    template_section: |
+      ## Validation
+      After generating a solution, verify it by:
+      - Approaching the problem from a different angle
+      - Checking if the answer makes logical sense
+      - Looking for edge cases that might break it
+
+  verification:
+    family: self_critique
+    description: "Verify answer before returning"
+    when_to_use:
+      - correctness_critical
+      - code
+      - math
+    when_to_avoid:
+      - creative_tasks
+    template_section: |
+      ## Verification Checklist
+      Before completing, verify:
+      - [ ] Solution addresses the core problem
+      - [ ] No regressions introduced
+      - [ ] Edge cases handled
+      - [ ] Code compiles/tests pass (if applicable)
+
+  self_critique:
+    family: self_critique
+    description: "Critically evaluate own output"
+    when_to_use:
+      - security_sensitive
+      - production_code
+    when_to_avoid:
+      - exploratory_tasks
+    template_section: |
+      ## Self-Review
+      After completing, critically evaluate:
+      - What could go wrong with this approach?
+      - Are there security implications?
+      - What would a senior reviewer flag?
+
+  # Output Control Family
+  structured_output:
+    family: output_control
+    description: "Enforce specific output format"
+    when_to_use:
+      - json_output
+      - api_response
+      - parsing_needed
+    when_to_avoid:
+      - free_form
+      - creative
+    template_section: |
+      ## Output Format
+      {{output.format_instructions}}
+
+  structured_output_enforcement:
+    family: output_control
+    description: "Strict JSON/structured output"
+    when_to_use:
+      - json_required
+      - programmatic_consumption
+    when_to_avoid:
+      - human_readable_primary
+    template_section: |
+      ## Output Format
+      Return ONLY valid JSON matching this schema:
+      ```json
+      {{output.schema}}
+      ```
+      No additional text before or after the JSON.
+
+  # Code-Specific Family
+  test_first:
+    family: code_specific
+    description: "Write test before implementation"
+    when_to_use:
+      - new_function
+      - bug_fix
+      - refactor
+    when_to_avoid:
+      - exploration
+      - documentation
+    template_section: |
+      ## TDD Approach
+      1. First, write a failing test that captures the expected behavior
+      2. Implement the minimal code to pass the test
+      3. Refactor if needed while keeping tests green
+
+  verification_step:
+    family: code_specific
+    description: "Add explicit verification for code tasks"
+    when_to_use:
+      - code_changes
+      - implementations
+    when_to_avoid:
+      - research_only
+    template_section: |
+      ## Verification
+      After implementing:
+      - Run existing tests to check for regressions
+      - Test the new functionality manually if needed
+      - Check for linting/type errors
+
+  # Additional Techniques
+  clarification_request:
+    family: zero_shot
+    description: "Request missing information"
+    when_to_use:
+      - underspecified_input
+      - ambiguous_request
+    when_to_avoid:
+      - clear_intent
+    template_section: |
+      ## Clarification Needed
+      Before proceeding, I need to understand:
+      {{#each missing_info}}
+      - {{this}}
+      {{/each}}
+
+  context_injection:
+    family: zero_shot
+    description: "Inject relevant context"
+    when_to_use:
+      - file_context_available
+      - domain_specific
+    when_to_avoid:
+      - general_knowledge
+    template_section: |
+      ## Context
+      {{context.summary}}
+      {{#if context.files}}
+      **Relevant files:**
+      {{#each context.files}}
+      - `{{this}}`
+      {{/each}}
+      {{/if}}
+
+  constraints:
+    family: output_control
+    description: "Explicit constraints section"
+    when_to_use:
+      - specific_requirements
+      - limitations
+    when_to_avoid:
+      - open_ended
+    template_section: |
+      ## Constraints
+      {{#each constraints}}
+      - {{this}}
+      {{/each}}
+
+# Mapping of task types to default techniques
+task_technique_mapping:
+  classification:
+    base:
+      - zero_shot_direct
+    optional:
+      - few_shot
+    antipatterns:
+      - chain_of_thought  # Overthinking hurts classification
+
+  reasoning:
+    base:
+      - chain_of_thought
+    optional:
+      - decomposition
+      - self_consistency
+    antipatterns: []
+
+  code:
+    base:
+      - structured_output
+      - verification_step
+    optional:
+      - plan_and_solve
+      - test_first
+    antipatterns: []
+
+  synthesis:
+    base:
+      - role_prompting
+      - structured_output
+    optional:
+      - iterative_refinement
+    antipatterns: []
+
+  research:
+    base:
+      - context_injection
+      - structured_output
+    optional:
+      - decomposition
+    antipatterns: []
+
+  evaluation:
+    base:
+      - structured_output
+      - verification
+    optional:
+      - self_critique
+    antipatterns: []
+
+  agentic:
+    base:
+      - plan_and_solve
+      - verification_step
+    optional:
+      - decomposition
+      - self_critique
+    antipatterns: []

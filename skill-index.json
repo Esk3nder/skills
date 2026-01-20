@@ -1,0 +1,1295 @@
+{
+  "generated": "2026-01-20T21:56:00.000Z",
+  "totalSkills": 57,
+  "alwaysLoadedCount": 1,
+  "deferredCount": 56,
+  "validCount": 57,
+  "invalidCount": 0,
+  "skills": {
+    "agents": {
+      "name": "Agents",
+      "path": "Agents/SKILL.md",
+      "fullDescription": "Dynamic agent composition and management system. USE WHEN user says create custom agents, spin up custom agents, specialized agents, OR asks for agent personalities, available traits, agent voices. Handles custom agent creation, personality assignment, voice mapping, and parallel agent orchestration.",
+      "triggers": [
+        "custom",
+        "agents",
+        "spin",
+        "up",
+        "specialized",
+        "agent",
+        "personalities",
+        "available",
+        "traits",
+        "voices"
+      ],
+      "workflows": [
+        "ComposeAgent",
+        "ManageAgents"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "allium": {
+      "name": "Allium",
+      "path": "Allium/SKILL.md",
+      "fullDescription": "Enterprise blockchain data platform for SQL queries across 80+ chains. USE WHEN blockchain analytics OR DEX trades OR token transfers OR wallet balances OR NFT data OR stablecoin metrics OR lending protocol data OR crosschain queries.",
+      "triggers": [
+        "blockchain",
+        "analytics",
+        "dex",
+        "trades",
+        "token",
+        "transfers",
+        "wallet",
+        "balances",
+        "nft",
+        "stablecoin",
+        "lending",
+        "crosschain"
+      ],
+      "workflows": [
+        "MCPMode",
+        "LegacyMode",
+        "SchemaExplorer"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "annualreports": {
+      "name": "AnnualReports",
+      "path": "AnnualReports/SKILL.md",
+      "fullDescription": "Annual security report aggregation and analysis. USE WHEN annual reports, security reports, threat reports, industry reports, update reports, analyze reports, vendor reports, threat landscape.",
+      "triggers": [
+        "annual",
+        "reports",
+        "security",
+        "threat",
+        "industry",
+        "vendor",
+        "landscape"
+      ],
+      "workflows": [
+        "Update",
+        "Analyze",
+        "Fetch"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "art": {
+      "name": "Art",
+      "path": "Art/SKILL.md",
+      "fullDescription": "Complete visual content system. USE WHEN user wants to create visual content, illustrations, diagrams, OR mentions art, header images, visualizations, mermaid, flowchart, technical diagram, infographic, PAI icon, pack icon, or PAI pack icon.",
+      "triggers": [
+        "visual",
+        "content",
+        "illustrations",
+        "diagrams",
+        "art",
+        "header",
+        "images",
+        "mermaid",
+        "flowchart",
+        "infographic"
+      ],
+      "workflows": [
+        "CreateVisual",
+        "GenerateDiagram"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "brightdata": {
+      "name": "BrightData",
+      "path": "BrightData/SKILL.md",
+      "fullDescription": "Progressive URL scraping. USE WHEN Bright Data, scrape URL, web scraping tiers. SkillSearch('brightdata') for docs.",
+      "triggers": [
+        "bright",
+        "data",
+        "scrape",
+        "url",
+        "web",
+        "scraping"
+      ],
+      "workflows": [
+        "FourTierScrape"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "browser": {
+      "name": "Browser",
+      "path": "Browser/SKILL.md",
+      "fullDescription": "Debug-first browser automation with always-on visibility. Console logs, network requests, and errors captured by default. USE WHEN browser, screenshot, debug web, verify UI, troubleshoot frontend.",
+      "triggers": [
+        "browser",
+        "screenshot",
+        "debug",
+        "web",
+        "verify",
+        "ui",
+        "troubleshoot",
+        "frontend"
+      ],
+      "workflows": [
+        "Browse",
+        "Screenshot"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "council": {
+      "name": "Council",
+      "path": "Council/SKILL.md",
+      "fullDescription": "Multi-agent debate system. USE WHEN council, debate, perspectives, agents discuss. SkillSearch('council') for docs.",
+      "triggers": [
+        "council",
+        "debate",
+        "perspectives",
+        "agents",
+        "discuss"
+      ],
+      "workflows": [
+        "Debate"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "createcli": {
+      "name": "CreateCLI",
+      "path": "CreateCLI/SKILL.md",
+      "fullDescription": "Generate TypeScript CLIs. USE WHEN create CLI, build CLI, command-line tool. SkillSearch('createcli') for docs.",
+      "triggers": [
+        "create",
+        "cli",
+        "build",
+        "command-line",
+        "tool"
+      ],
+      "workflows": [
+        "GenerateCLI"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "firstprinciples": {
+      "name": "FirstPrinciples",
+      "path": "FirstPrinciples/SKILL.md",
+      "fullDescription": "First principles analysis. USE WHEN first principles, fundamental, root cause, decompose. SkillSearch('firstprinciples') for docs.",
+      "triggers": [
+        "first",
+        "principles",
+        "fundamental",
+        "root",
+        "cause",
+        "decompose"
+      ],
+      "workflows": [
+        "Analyze"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "osint": {
+      "name": "OSINT",
+      "path": "OSINT/SKILL.md",
+      "fullDescription": "Open source intelligence gathering. USE WHEN OSINT, due diligence, background check, research person, company intel, investigate. SkillSearch('osint') for docs.",
+      "triggers": [
+        "osint",
+        "due",
+        "diligence",
+        "background",
+        "check",
+        "research",
+        "person",
+        "company",
+        "intel",
+        "investigate"
+      ],
+      "workflows": [
+        "PeopleLookup",
+        "CompanyLookup",
+        "CompanyDueDiligence",
+        "EntityLookup"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "paiupgrade": {
+      "name": "PAIUpgrade",
+      "path": "PAIUpgrade/SKILL.md",
+      "fullDescription": "Extract system improvements from content AND monitor external sources (Anthropic ecosystem, YouTube). USE WHEN upgrade, improve system, system upgrade, analyze for improvements, check Anthropic, Anthropic changes, new Claude features, check YouTube, new videos. SkillSearch('upgrade') for docs.",
+      "triggers": [
+        "upgrade",
+        "improve",
+        "system",
+        "anthropic",
+        "changes",
+        "claude",
+        "features",
+        "youtube",
+        "videos"
+      ],
+      "workflows": [
+        "AnalyzeContent",
+        "MonitorSources"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "privateinvestigator": {
+      "name": "PrivateInvestigator",
+      "path": "PrivateInvestigator/SKILL.md",
+      "fullDescription": "Ethical people-finding. USE WHEN find person, locate, reconnect, people search, skip trace. SkillSearch('privateinvestigator') for docs.",
+      "triggers": [
+        "find",
+        "person",
+        "locate",
+        "reconnect",
+        "people",
+        "search",
+        "skip",
+        "trace"
+      ],
+      "workflows": [
+        "FindPerson"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "recon": {
+      "name": "Recon",
+      "path": "Recon/SKILL.md",
+      "fullDescription": "Security reconnaissance. USE WHEN recon, reconnaissance, bug bounty, attack surface. SkillSearch('recon') for docs.",
+      "triggers": [
+        "recon",
+        "reconnaissance",
+        "bug",
+        "bounty",
+        "attack",
+        "surface"
+      ],
+      "workflows": [
+        "InfrastructureRecon"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "redteam": {
+      "name": "RedTeam",
+      "path": "RedTeam/SKILL.md",
+      "fullDescription": "Adversarial analysis with 32 agents. USE WHEN red team, attack idea, counterarguments, critique, stress test. SkillSearch('redteam') for docs.",
+      "triggers": [
+        "red",
+        "team",
+        "attack",
+        "idea",
+        "counterarguments",
+        "critique",
+        "stress",
+        "test"
+      ],
+      "workflows": [
+        "ParallelAnalysis",
+        "AdversarialValidation"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "research": {
+      "name": "Research",
+      "path": "Research/SKILL.md",
+      "fullDescription": "Comprehensive research, analysis, and content extraction system. USE WHEN user says 'do research', 'do extensive research', 'quick research', 'minor research', 'research this', 'find information', 'investigate', 'extract wisdom', 'extract alpha', 'analyze content', 'can't get this content', 'use fabric', OR requests any web/content research.",
+      "triggers": [
+        "research",
+        "extensive",
+        "quick",
+        "find",
+        "information",
+        "investigate",
+        "extract",
+        "wisdom",
+        "alpha",
+        "analyze",
+        "content",
+        "fabric"
+      ],
+      "workflows": [
+        "QuickResearch",
+        "StandardResearch",
+        "ExtensiveResearch",
+        "ContentAnalysis"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "system": {
+      "name": "System",
+      "path": "System/SKILL.md",
+      "fullDescription": "System maintenance with three core operations - integrity check (find/fix broken references), document session (current transcript), document recent (catch-up since last update). Plus security workflows. USE WHEN integrity check, audit system, document session, document this session, document today, document recent, catch up docs, what's undocumented, check for secrets, security scan, privacy check, OR asking about past work.",
+      "triggers": [
+        "integrity",
+        "check",
+        "audit",
+        "system",
+        "document",
+        "session",
+        "recent",
+        "catch",
+        "up",
+        "docs",
+        "secrets",
+        "security",
+        "scan",
+        "privacy"
+      ],
+      "workflows": [
+        "IntegrityCheck",
+        "DocumentSession",
+        "DocumentRecent",
+        "SecurityScan"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "thealgorithm": {
+      "name": "THEALGORITHM",
+      "path": "THEALGORITHM/SKILL.md",
+      "fullDescription": "Universal execution engine using scientific method to achieve ideal state. USE WHEN complex tasks, multi-step work, 'run the algorithm', 'use the algorithm', OR any non-trivial request that benefits from structured execution with ISC (Ideal State Criteria) tracking.",
+      "triggers": [
+        "algorithm",
+        "run",
+        "the",
+        "use",
+        "complex",
+        "tasks",
+        "multi-step",
+        "isc",
+        "ideal",
+        "state"
+      ],
+      "workflows": [
+        "Execute"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "telos": {
+      "name": "Telos",
+      "path": "Telos/SKILL.md",
+      "fullDescription": "Life OS and project analysis. USE WHEN TELOS, life goals, projects, dependencies, books, movies. SkillSearch('telos') for docs.",
+      "triggers": [
+        "telos",
+        "life",
+        "goals",
+        "projects",
+        "dependencies",
+        "books",
+        "movies"
+      ],
+      "workflows": [
+        "Update",
+        "InterviewExtraction",
+        "CreateNarrativePoints",
+        "WriteReport"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "trivial": {
+      "name": "Trivial",
+      "path": "Trivial/SKILL.md",
+      "fullDescription": "Pass-through skill for simple tasks. USE WHEN no methodology needed OR quick fixes OR greetings OR confirmations.",
+      "triggers": [
+        "methodology",
+        "needed",
+        "quick",
+        "fixes",
+        "greetings",
+        "confirmations"
+      ],
+      "workflows": [
+        "PassThrough"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "finishingbranch": {
+      "name": "FinishingBranch",
+      "path": "FinishingBranch/SKILL.md",
+      "fullDescription": "Complete development work with structured options. USE WHEN implementation is complete OR all tests pass OR ready to merge OR ready to create PR OR need to decide how to integrate work.",
+      "triggers": [
+        "implementation",
+        "complete",
+        "all",
+        "tests",
+        "pass",
+        "ready",
+        "merge",
+        "create",
+        "need",
+        "decide",
+        "how",
+        "integrate",
+        "work"
+      ],
+      "workflows": [
+        "CompleteBranch"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "prompting": {
+      "name": "Prompting",
+      "path": "Prompting/SKILL.md",
+      "fullDescription": "Meta-prompting system for dynamic prompt generation using templates, standards, and patterns. USE WHEN meta-prompting OR template generation OR prompt optimization OR programmatic prompt composition OR creating dynamic agents.",
+      "triggers": [
+        "meta-prompting",
+        "template",
+        "generation",
+        "prompt",
+        "optimization",
+        "programmatic",
+        "composition",
+        "creating",
+        "dynamic",
+        "agents"
+      ],
+      "workflows": [],
+      "tier": "deferred",
+      "valid": true
+    },
+    "requestingcodereview": {
+      "name": "RequestingCodeReview",
+      "path": "RequestingCodeReview/SKILL.md",
+      "fullDescription": "Request code review at appropriate checkpoints. USE WHEN completing tasks OR implementing major features OR before merging OR before creating PRs OR after fixing complex bugs. Review early, review often.",
+      "triggers": [
+        "completing",
+        "tasks",
+        "implementing",
+        "major",
+        "features",
+        "before",
+        "merging",
+        "creating",
+        "prs",
+        "after",
+        "fixing",
+        "complex",
+        "bugs"
+      ],
+      "workflows": [
+        "RequestReview"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "agentevaluation": {
+      "name": "AgentEvaluation",
+      "path": "AgentEvaluation/SKILL.md",
+      "fullDescription": "Evaluate and improve Claude Code agents using LLM-as-judge patterns, rubrics, and metrics. USE WHEN testing prompt effectiveness OR validating context engineering OR measuring agent improvement OR designing evaluation rubrics OR comparing agent performance.",
+      "triggers": [
+        "testing",
+        "prompt",
+        "effectiveness",
+        "validating",
+        "context",
+        "engineering",
+        "measuring",
+        "agent",
+        "improvement",
+        "designing",
+        "evaluation",
+        "rubrics",
+        "comparing",
+        "performance"
+      ],
+      "workflows": [
+        "EvaluateAgent"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "promptcompiler": {
+      "name": "PromptCompiler",
+      "path": "PromptCompiler/SKILL.md",
+      "fullDescription": "Transform lazy/underspecified inputs into best-practice prompts using deterministic task classification and technique selection. USE WHEN vague prompt OR prompt refinement OR underspecified input OR improve prompt quality OR technique selection.",
+      "triggers": [
+        "vague",
+        "prompt",
+        "refinement",
+        "underspecified",
+        "input",
+        "improve",
+        "quality",
+        "technique",
+        "selection"
+      ],
+      "workflows": [
+        "RefinePrompt",
+        "AnalyzeTechnique"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "telegramdelivery": {
+      "name": "TelegramDelivery",
+      "path": "TelegramDelivery/SKILL.md",
+      "fullDescription": "Send files to user via Telegram bot. USE WHEN send file to Telegram OR share document OR deliver PDF OR send to user.",
+      "triggers": [
+        "send",
+        "file",
+        "telegram",
+        "share",
+        "document",
+        "deliver",
+        "pdf",
+        "user"
+      ],
+      "workflows": [
+        "SendFile"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "verificationbeforecompletion": {
+      "name": "VerificationBeforeCompletion",
+      "path": "VerificationBeforeCompletion/SKILL.md",
+      "fullDescription": "Verification discipline before claiming completion. INTERNAL DISCIPLINE - invoked by ExecutingPlans, FinishingBranch, SystematicDebugging, and code review skills. Evidence before assertions. Not directly triggered by user requests.",
+      "triggers": [],
+      "workflows": [
+        "VerifyBeforeClaim"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "receivingcodereview": {
+      "name": "ReceivingCodeReview",
+      "path": "ReceivingCodeReview/SKILL.md",
+      "fullDescription": "Handle code review feedback with technical rigor. USE WHEN receiving code review feedback OR implementing reviewer suggestions OR feedback seems unclear OR feedback seems technically questionable. No performative agreement, verify before implementing.",
+      "triggers": [
+        "receiving",
+        "code",
+        "review",
+        "feedback",
+        "implementing",
+        "reviewer",
+        "suggestions",
+        "seems",
+        "unclear",
+        "technically",
+        "questionable"
+      ],
+      "workflows": [
+        "EvaluateFeedback"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "dailyreview": {
+      "name": "DailyReview",
+      "path": "DailyReview/SKILL.md",
+      "fullDescription": "Daily task synthesis and review. USE WHEN starting the day OR asking \"what should I work on\" OR wanting a daily overview OR running /today command.",
+      "triggers": [
+        "starting",
+        "the",
+        "day",
+        "asking",
+        "\"what",
+        "should",
+        "work",
+        "on\"",
+        "wanting",
+        "daily",
+        "overview",
+        "running",
+        "/today",
+        "command"
+      ],
+      "workflows": [
+        "GenerateDaily"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "reactuseeffect": {
+      "name": "ReactUseEffect",
+      "path": "ReactUseEffect/SKILL.md",
+      "fullDescription": "React useEffect best practices from official docs. USE WHEN writing useEffect OR reviewing Effects OR useState for derived values OR data fetching OR state synchronization.",
+      "triggers": [
+        "writing",
+        "useeffect",
+        "reviewing",
+        "effects",
+        "usestate",
+        "for",
+        "derived",
+        "values",
+        "data",
+        "fetching",
+        "state",
+        "synchronization"
+      ],
+      "workflows": [
+        "ReviewEffect"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "ethereum": {
+      "name": "Ethereum",
+      "path": "Ethereum/SKILL.md",
+      "fullDescription": "Ethereum Subject Matter Expert with EVM internals, DeFi primitives, and live protocol data. USE WHEN explaining EVM opcodes OR understanding AMM math OR debugging transactions OR analyzing DeFi protocols OR explaining gas calculations OR understanding lending mechanics OR querying latest EIPs.",
+      "triggers": [
+        "explaining",
+        "evm",
+        "opcodes",
+        "understanding",
+        "amm",
+        "math",
+        "debugging",
+        "transactions",
+        "analyzing",
+        "defi",
+        "protocols",
+        "gas",
+        "calculations",
+        "lending",
+        "mechanics",
+        "querying",
+        "latest",
+        "eips"
+      ],
+      "workflows": [
+        "ExplainConcept",
+        "TraceCodepath"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "testdrivendevelopment": {
+      "name": "TestDrivenDevelopment",
+      "path": "TestDrivenDevelopment/SKILL.md",
+      "fullDescription": "Strict TDD methodology for AI-assisted development. INTERNAL DISCIPLINE - invoked by WritingPlans, ExecutingPlans, and SystematicDebugging. Enforces red-green-refactor cycle. Not directly triggered by user requests.",
+      "triggers": [],
+      "workflows": [
+        "RedGreenRefactor",
+        "BugFix"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "createskill": {
+      "name": "CreateSkill",
+      "path": "CreateSkill/SKILL.md",
+      "fullDescription": "Create and validate skills. USE WHEN create skill, new skill, skill structure, canonicalize. SkillSearch('createskill') for docs.",
+      "triggers": [
+        "create",
+        "skill",
+        "new",
+        "structure",
+        "canonicalize"
+      ],
+      "workflows": [
+        "CreateSkill",
+        "ValidateSkill",
+        "CanonicalizeSkill"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "systematicdebugging": {
+      "name": "SystematicDebugging",
+      "path": "SystematicDebugging/SKILL.md",
+      "fullDescription": "Systematic debugging methodology. INTERNAL DISCIPLINE - auto-invoked by MethodologyEnforcer hook when bugs/errors detected. Enforces root cause investigation before fixes. Not directly triggered by user requests.",
+      "triggers": [],
+      "workflows": [
+        "RootCauseAnalysis"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "dispatchingparallelagents": {
+      "name": "DispatchingParallelAgents",
+      "path": "DispatchingParallelAgents/SKILL.md",
+      "fullDescription": "Dispatch multiple agents concurrently for independent work. USE WHEN facing 2+ independent tasks OR multiple test failures across different files OR parallel investigations with no shared state. Each agent gets focused scope.",
+      "triggers": [
+        "facing",
+        "independent",
+        "tasks",
+        "multiple",
+        "test",
+        "failures",
+        "across",
+        "different",
+        "files",
+        "parallel",
+        "investigations",
+        "with",
+        "shared",
+        "state"
+      ],
+      "workflows": [
+        "ParallelDispatch"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "skillusageanalytics": {
+      "name": "SkillUsageAnalytics",
+      "path": "SkillUsageAnalytics/SKILL.md",
+      "fullDescription": "Analyze skill usage patterns and generate recommendations. USE WHEN reviewing methodology effectiveness or wanting suggestions for underutilized skills.",
+      "triggers": [
+        "reviewing",
+        "methodology",
+        "effectiveness",
+        "wanting",
+        "suggestions",
+        "for",
+        "underutilized",
+        "skills"
+      ],
+      "workflows": [
+        "GenerateReport"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "nansen": {
+      "name": "Nansen",
+      "path": "Nansen/SKILL.md",
+      "fullDescription": "Smart money blockchain analytics via Nansen API. USE WHEN analyzing whale wallets OR tracking token flows OR identifying smart money movements OR researching DeFi positions OR finding alpha signals.",
+      "triggers": [
+        "analyzing",
+        "whale",
+        "wallets",
+        "tracking",
+        "token",
+        "flows",
+        "identifying",
+        "smart",
+        "money",
+        "movements",
+        "researching",
+        "defi",
+        "positions",
+        "finding",
+        "alpha",
+        "signals"
+      ],
+      "workflows": [
+        "SmartMoneyAnalysis",
+        "WalletResearch",
+        "TokenFlowTracking"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "txt2img": {
+      "name": "Txt2Img",
+      "path": "Txt2Img/SKILL.md",
+      "fullDescription": "Intelligent prompt generator for text-to-image models with semantic understanding, commonsense reasoning, and consistency checks. USE WHEN generating image prompts OR creating portrait prompts OR Midjourney prompts OR Stable Diffusion prompts OR DALL-E prompts.",
+      "triggers": [
+        "generating",
+        "image",
+        "prompts",
+        "creating",
+        "portrait",
+        "midjourney",
+        "stable",
+        "diffusion",
+        "dall-e"
+      ],
+      "workflows": [
+        "GeneratePrompt"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "writingplans": {
+      "name": "WritingPlans",
+      "path": "WritingPlans/SKILL.md",
+      "fullDescription": "Create detailed implementation plans with bite-sized TDD steps. USE WHEN you have requirements for a multi-step task OR after brainstorming OR before touching code for complex features. Plans assume zero codebase context.",
+      "triggers": [
+        "you",
+        "have",
+        "requirements",
+        "for",
+        "multi-step",
+        "task",
+        "after",
+        "brainstorming",
+        "before",
+        "touching",
+        "code",
+        "complex",
+        "features"
+      ],
+      "workflows": [
+        "CreatePlan"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "contextengineering": {
+      "name": "ContextEngineering",
+      "path": "ContextEngineering/SKILL.md",
+      "fullDescription": "Context management for agent systems. USE WHEN writing skills OR optimizing prompts OR diagnosing context degradation OR designing multi-agent workflows OR context issues detected OR performance degrades over conversation.",
+      "triggers": [
+        "writing",
+        "skills",
+        "optimizing",
+        "prompts",
+        "diagnosing",
+        "context",
+        "degradation",
+        "designing",
+        "multi-agent",
+        "workflows",
+        "issues",
+        "detected",
+        "performance",
+        "degrades",
+        "over",
+        "conversation"
+      ],
+      "workflows": [
+        "OptimizeContext"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "askdaniel": {
+      "name": "AskDaniel",
+      "path": "AskDaniel/SKILL.md",
+      "fullDescription": "Daniel-style feature screening for PAI. USE WHEN new skill for PAI OR new hook for skish OR new tool for PAI OR add workflow to skish OR design PAI feature. Screens feature requests against Daniel principles.",
+      "triggers": [
+        "new",
+        "skill",
+        "for",
+        "pai",
+        "hook",
+        "skish",
+        "tool",
+        "add",
+        "workflow",
+        "design",
+        "feature"
+      ],
+      "workflows": [
+        "ReviewFeature"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "usingworkflows": {
+      "name": "UsingWorkflows",
+      "path": "UsingWorkflows/SKILL.md",
+      "fullDescription": "Check and invoke relevant workflow skills before acting. USE WHEN starting any non-trivial task OR routing needed OR unclear which skill applies.",
+      "triggers": [
+        "starting",
+        "any",
+        "non-trivial",
+        "task",
+        "routing",
+        "needed",
+        "unclear",
+        "which",
+        "skill",
+        "applies"
+      ],
+      "workflows": [
+        "Route"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "youtubedigest": {
+      "name": "YouTubeDigest",
+      "path": "YouTubeDigest/SKILL.md",
+      "fullDescription": "Automated YouTube AI news digests. USE WHEN youtube digest OR ai news summary OR video transcript OR channel monitoring.",
+      "triggers": [
+        "youtube",
+        "digest",
+        "news",
+        "summary",
+        "video",
+        "transcript",
+        "channel",
+        "monitoring"
+      ],
+      "workflows": [
+        "DailyDigest"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "review": {
+      "name": "Review",
+      "path": "Review/SKILL.md",
+      "fullDescription": "Multi-agent code review with parallel analysis. USE WHEN PR URL mentioned OR \"review this\" OR \"check my changes\" OR before merge.",
+      "triggers": [
+        "url",
+        "mentioned",
+        "\"review",
+        "this\"",
+        "\"check",
+        "changes\"",
+        "before",
+        "merge"
+      ],
+      "workflows": [
+        "CodeReview"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "notebooklm": {
+      "name": "NotebookLM",
+      "path": "NotebookLM/SKILL.md",
+      "fullDescription": "Query Google NotebookLM notebooks for source-grounded answers from Gemini. USE WHEN querying NotebookLM OR asking my notebooks OR document-grounded research OR citation-backed answers OR notebook library management OR check my docs.",
+      "triggers": [
+        "querying",
+        "notebooklm",
+        "asking",
+        "notebooks",
+        "document-grounded",
+        "research",
+        "citation-backed",
+        "answers",
+        "notebook",
+        "library",
+        "management",
+        "check",
+        "docs"
+      ],
+      "workflows": [
+        "QueryNotebook",
+        "ManageLibrary",
+        "Authenticate"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "damagecontrol": {
+      "name": "DamageControl",
+      "path": "DamageControl/SKILL.md",
+      "fullDescription": "Defense-in-depth protection blocking dangerous commands and protected paths via PreToolUse hooks. USE WHEN user asks about security patterns OR blocked commands OR path protection OR wants to modify damage control rules.",
+      "triggers": [
+        "user",
+        "asks",
+        "about",
+        "security",
+        "patterns",
+        "blocked",
+        "commands",
+        "path",
+        "protection",
+        "wants",
+        "modify",
+        "damage",
+        "control",
+        "rules"
+      ],
+      "workflows": [
+        "ModifyPatterns",
+        "TestDamageControl"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "usingskills": {
+      "name": "UsingSkills",
+      "path": "UsingSkills/SKILL.md",
+      "fullDescription": "Meta skill for skill discovery and invocation. USE WHEN starting any conversation OR unsure which skill applies OR need to understand the skill system. Establishes rule that skills MUST be invoked before ANY response.",
+      "triggers": [
+        "starting",
+        "any",
+        "conversation",
+        "unsure",
+        "which",
+        "skill",
+        "applies",
+        "need",
+        "understand",
+        "the",
+        "system"
+      ],
+      "workflows": [],
+      "tier": "deferred",
+      "valid": true
+    },
+    "voiceinterface": {
+      "name": "VoiceInterface",
+      "path": "VoiceInterface/SKILL.md",
+      "fullDescription": "Voice interaction with Claude. USE WHEN user wants voice input OR voice output OR query remote Claude by voice OR analyze voice usage patterns.",
+      "triggers": [
+        "user",
+        "wants",
+        "voice",
+        "input",
+        "output",
+        "query",
+        "remote",
+        "claude",
+        "analyze",
+        "usage",
+        "patterns"
+      ],
+      "workflows": [
+        "VoiceQuery"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "brainstorming": {
+      "name": "Brainstorming",
+      "path": "Brainstorming/SKILL.md",
+      "fullDescription": "Design exploration before implementation. USE WHEN creating features OR building components OR adding functionality OR modifying behavior OR starting new work. Explores intent, requirements, and design before touching code.",
+      "triggers": [
+        "creating",
+        "features",
+        "building",
+        "components",
+        "adding",
+        "functionality",
+        "modifying",
+        "behavior",
+        "starting",
+        "new",
+        "work"
+      ],
+      "workflows": [
+        "ExploreDesign"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "thoughtbasedreasoning": {
+      "name": "ThoughtBasedReasoning",
+      "path": "ThoughtBasedReasoning/SKILL.md",
+      "fullDescription": "Reasoning techniques for complex problems. USE WHEN tackling multi-step logic OR arithmetic OR commonsense reasoning OR symbolic manipulation OR problems where simple prompting fails OR selecting reasoning approach.",
+      "triggers": [
+        "tackling",
+        "multi-step",
+        "logic",
+        "arithmetic",
+        "commonsense",
+        "reasoning",
+        "symbolic",
+        "manipulation",
+        "problems",
+        "where",
+        "simple",
+        "prompting",
+        "fails",
+        "selecting",
+        "approach"
+      ],
+      "workflows": [
+        "SelectReasoning"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "usinggitworktrees": {
+      "name": "UsingGitWorktrees",
+      "path": "UsingGitWorktrees/SKILL.md",
+      "fullDescription": "Create isolated git worktrees for feature development. USE WHEN starting feature work that needs isolation OR before executing implementation plans OR working on multiple branches simultaneously. Smart directory selection and safety verification.",
+      "triggers": [
+        "starting",
+        "feature",
+        "work",
+        "that",
+        "needs",
+        "isolation",
+        "before",
+        "executing",
+        "implementation",
+        "plans",
+        "working",
+        "multiple",
+        "branches",
+        "simultaneously"
+      ],
+      "workflows": [
+        "CreateWorktree"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "deepresearch": {
+      "name": "DeepResearch",
+      "path": "DeepResearch/SKILL.md",
+      "fullDescription": "Parallel research with breadth and depth lenses. USE WHEN deep research OR research from multiple angles OR comprehensive investigation OR thorough analysis OR parallel research.",
+      "triggers": [
+        "deep",
+        "research",
+        "from",
+        "multiple",
+        "angles",
+        "comprehensive",
+        "investigation",
+        "thorough",
+        "analysis",
+        "parallel"
+      ],
+      "workflows": [
+        "ParallelResearch"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "uiux": {
+      "name": "UIUX",
+      "path": "UIUX/SKILL.md",
+      "fullDescription": "UI/UX design guidance and reviews. USE WHEN reviewing designs OR implementing UI OR creating components OR accessibility OR responsive design OR user experience OR mockup feedback OR design system OR audit interface OR polish UI.",
+      "triggers": [
+        "reviewing",
+        "designs",
+        "implementing",
+        "creating",
+        "components",
+        "accessibility",
+        "responsive",
+        "design",
+        "user",
+        "experience",
+        "mockup",
+        "feedback",
+        "system",
+        "audit",
+        "interface",
+        "polish"
+      ],
+      "workflows": [
+        "DesignReview",
+        "Audit",
+        "Critique",
+        "ImplementWithPrinciples",
+        "ComponentDesign",
+        "Polish"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "pdf": {
+      "name": "Pdf",
+      "path": "Pdf/SKILL.md",
+      "fullDescription": "PDF manipulation toolkit. USE WHEN creating PDFs OR extracting text from PDF OR merging PDFs OR filling PDF forms OR converting markdown to PDF. Uses Python libraries (reportlab, pypdf, pdfplumber).",
+      "triggers": [
+        "creating",
+        "pdfs",
+        "extracting",
+        "text",
+        "from",
+        "pdf",
+        "merging",
+        "filling",
+        "forms",
+        "converting",
+        "markdown"
+      ],
+      "workflows": [
+        "ProcessPdf"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "core": {
+      "name": "CORE",
+      "path": "CORE/SKILL.md",
+      "fullDescription": "Personal AI Infrastructure core. AUTO-LOADS at session start. USE WHEN any session begins OR user asks about identity, response format, contacts, stack preferences.",
+      "triggers": [
+        "any",
+        "session",
+        "begins",
+        "user",
+        "asks",
+        "about",
+        "identity",
+        "response",
+        "format",
+        "contacts",
+        "stack",
+        "preferences"
+      ],
+      "workflows": [],
+      "tier": "always",
+      "valid": true
+    },
+    "compound": {
+      "name": "Compound",
+      "path": "Compound/SKILL.md",
+      "fullDescription": "Capture solved problems as categorized documentation with YAML frontmatter. USE WHEN problem solved OR \"that worked\" OR \"it's fixed\" OR documenting solutions.",
+      "triggers": [
+        "problem",
+        "solved",
+        "\"that",
+        "worked\"",
+        "\"it's",
+        "fixed\"",
+        "documenting",
+        "solutions"
+      ],
+      "workflows": [
+        "Capture"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "executingplans": {
+      "name": "ExecutingPlans",
+      "path": "ExecutingPlans/SKILL.md",
+      "fullDescription": "Execute implementation plans with review checkpoints. USE WHEN you have a written plan to implement OR executing multi-task development OR following a plan document. Batch execution with verification.",
+      "triggers": [
+        "you",
+        "have",
+        "written",
+        "plan",
+        "implement",
+        "executing",
+        "multi-task",
+        "development",
+        "following",
+        "document"
+      ],
+      "workflows": [
+        "ExecutePlan"
+      ],
+      "tier": "deferred",
+      "valid": true
+    },
+    "subagentdrivendevelopment": {
+      "name": "SubagentDrivenDevelopment",
+      "path": "SubagentDrivenDevelopment/SKILL.md",
+      "fullDescription": "Execute implementation plans with fresh subagents per task. USE WHEN executing plans with independent tasks in current session OR wanting automated two-stage review (spec then quality) OR needing fresh context per task. Alternative to ExecutingPlans for same-session work.",
+      "triggers": [
+        "executing",
+        "plans",
+        "with",
+        "independent",
+        "tasks",
+        "current",
+        "session",
+        "wanting",
+        "automated",
+        "two-stage",
+        "review",
+        "(spec",
+        "then",
+        "quality)",
+        "needing",
+        "fresh",
+        "context",
+        "per",
+        "task"
+      ],
+      "workflows": [
+        "ExecuteWithSubagents"
+      ],
+      "tier": "deferred",
+      "valid": true
+    }
+  }
+}
