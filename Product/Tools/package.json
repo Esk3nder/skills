@@ -1,0 +1,12 @@
+{
+  "name": "lennyhub-rag-tools",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "ingest": "bun run IngestTranscripts.ts",
+    "query": "bun run QueryLenny.ts"
+  },
+  "dependencies": {
+    "@lancedb/lancedb": "^0.13.0"
+  }
+}

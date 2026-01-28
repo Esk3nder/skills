@@ -184,6 +184,7 @@ Any project I'm doing can be mapped all the way back up to the problem(s) I'm tr
 - Two-party system is good - forces compromise, oscillates between median view better than 30 parties arguing
 - Crypto × AI is the future, not a scam - they intertwine (AI = abundance, crypto = scarcity)
 - Ethereum is the system most closely aligned to my ideals (credibly neutral, permissionless)
+- **Crypto AI VC Fund thesis**: Hold cash late in deployment cycle. Models only getting better, infrastructure buildouts need time. Very few bets to start - embed with teams, be hands-on, improve their flow, study market deeply. Deploy when you expect launch dates to align with models built post-30GW AI infrastructure era - catch the blow-off top from models deployed on this infra
 
 ---
 
